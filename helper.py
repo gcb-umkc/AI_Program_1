@@ -44,8 +44,8 @@ def arrayPair(hand, num):
 
 def compareOnePair(player, opponent):
 
-    playerPairs, tempPlayer = arrayPair(player)
-    opponentPairs, tempOpponent = arrayPair(opponent)
+    playerPairs, tempPlayer = arrayPair(player, 2)
+    opponentPairs, tempOpponent = arrayPair(opponent, 2)
     
     if (playerPairs[0] > opponentPairs[0]):
         return True
@@ -128,14 +128,12 @@ def compareStraightFlush(player, opponent):
     return compareFlush(player, opponent)
 
 def royalFlush(hand):
-    if(findFlush(hand)):
-       for index in range(len(hand) - 1):
-           wrap = (index + 1) % 14
-           if (hand[index][0] != (hand[wrap][0] - 1)):  
-               return False
-       return True 
-    else:
-        return False
+    royal = [(1, 1), (10, 1), (11, 1), (12, 1), (13, 1)]
+    hand.sort()
+    for index in range(len(royal)):
+        if (royal[index][0] != hand[index][0]):
+            return False
+    return True
     
 def findScore(hand):
     
@@ -157,12 +155,11 @@ def findScore(hand):
     if(royalFlush(hand)): score = 9
     
     if(score == -1):
-        raise()
-        
+        raise BaseException
     return score
     
-test_hand = [(10, 2), (10, 1), (10, 1), (7, 1), (8, 1)]
-test_opponent = [(11, 3), (11, 1), (11, 1), (7, 1), (13, 1)]
+test_hand = [(11, 1), (1, 1), (13, 1), (12, 1), (10, 1)]
+test_opponent = [(1, 1), (2, 1), (3, 1), (4, 1), (5, 1)]
 
     
 #print (findScore(test_hand))
@@ -194,8 +191,7 @@ def compareHands(player, opponent):
     if (score == 8):
         return compareStraightFlush(player, opponent)
     if (score == 9):
-        raise()
-    return False
+        raise BaseException
 
 #Finds the better of 2 hands
 def betterHand(player, opponent):
@@ -208,6 +204,3 @@ def betterHand(player, opponent):
     #Need to break ties
     if(findScore(player) == findScore(opponent)):
         return compareHands(player, opponent)
-
-raise()
-print(betterHand(test_hand, test_opponent))

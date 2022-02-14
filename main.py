@@ -57,14 +57,15 @@ def runSimulation():
         #Check if player has won the round
         win = True
         for opponent in range(1, len(hands)):
-            if (betterHand(playerHand, opponent) == True):
+            if (betterHand(playerHand, hands[opponent]) == True):
                 win = False
                 break
                 
         #Updates the statistics for the player rank
         ranks_count[currRank] = ranks_count[currRank] + 1
         if (win): ranks_wins[currRank] = ranks_wins[currRank] + 1
-            
+        print(win)
+        print(currRank)
     return 0
     
 
