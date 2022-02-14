@@ -39,7 +39,7 @@ def arrayPair(hand, num):
                 if (card[0] == rank + 1):
                     playerPairs.append(card)
                     hand.remove(card)
-    print(playerPairs)
+    #print(playerPairs)
     return playerPairs, remHand
 
 def compareOnePair(player, opponent):
@@ -128,6 +128,8 @@ def compareStraightFlush(player, opponent):
     return compareFlush(player, opponent)
 
 def royalFlush(hand):
+    if(findFlush(hand) == False):
+        return False
     royal = [(1, 1), (10, 1), (11, 1), (12, 1), (13, 1)]
     hand.sort()
     for index in range(len(royal)):
@@ -146,6 +148,7 @@ def findScore(hand):
     if(findnKind(3, hand)): score = 3
     
     if(findStraight(hand)): score = 4
+    
     if(findFlush(hand)): score = 5
     
     if(fullHouse(hand)): score = 6
@@ -159,7 +162,7 @@ def findScore(hand):
     return score
     
 test_hand = [(11, 1), (1, 1), (13, 1), (12, 1), (10, 1)]
-test_opponent = [(1, 1), (2, 1), (3, 1), (4, 1), (5, 1)]
+test_opponent = [(1, 2), (2, 3), (3, 1), (4, 1), (5, 1)]
 
     
 #print (findScore(test_hand))
@@ -170,7 +173,7 @@ def compareHands(player, opponent):
     player.sort()
     opponent.sort()
     score = findScore(player)
-    print(score)
+    #print(score)
     
     if (score == 0):
        return compareNoPair(player, opponent)
@@ -204,3 +207,4 @@ def betterHand(player, opponent):
     #Need to break ties
     if(findScore(player) == findScore(opponent)):
         return compareHands(player, opponent)
+    

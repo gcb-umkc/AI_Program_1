@@ -40,12 +40,12 @@ def runSimulation():
     #Set up statistics
     ranks_count = []
     ranks_wins = []
-    for x in range(9): ranks_count.append(0)
-    for x in range(9): ranks_wins.append(0)
+    for x in range(10): ranks_count.append(0)
+    for x in range(10): ranks_wins.append(0)
     
     # Where n is the number of simulations
     deck = makeDeck()
-    n = 500
+    n = 10000
     for x in range(n):
         # Deal random cards into 5 hands
         hands = dealHands(deck, 5)
@@ -57,16 +57,17 @@ def runSimulation():
         #Check if player has won the round
         win = True
         for opponent in range(1, len(hands)):
-            if (betterHand(playerHand, hands[opponent]) == True):
+            if (betterHand(playerHand, hands[opponent]) == False):
                 win = False
                 break
                 
         #Updates the statistics for the player rank
         ranks_count[currRank] = ranks_count[currRank] + 1
         if (win): ranks_wins[currRank] = ranks_wins[currRank] + 1
-        print(win)
-        print(currRank)
+    print(ranks_count)
+    print(ranks_wins)
     return 0
+
     
 
     
