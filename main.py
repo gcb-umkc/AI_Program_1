@@ -45,7 +45,7 @@ def runSimulation():
     
     # Where n is the number of simulations
     deck = makeDeck()
-    n = 10000
+    n = 1000000
     for x in range(n):
         # Deal random cards into 5 hands
         hands = dealHands(deck, 5)
@@ -57,7 +57,7 @@ def runSimulation():
         #Check if player has won the round
         win = True
         for opponent in range(1, len(hands)):
-            if (betterHand(playerHand, hands[opponent]) == False):
+            if (betterHand(playerHand, hands[opponent]) != True):
                 win = False
                 break
                 

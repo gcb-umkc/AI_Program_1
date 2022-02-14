@@ -90,7 +90,7 @@ def compareFourPair(player, opponent):
 
 def findStraight(hand):
     for index in range(len(hand) - 1):
-        if (hand[index][0] != (hand[index + 1][0] - 1)):  
+        if (hand[index][0] != (hand[index + 1][0] - 1)):
             return False
     return True
 
@@ -132,7 +132,7 @@ def royalFlush(hand):
         return False
     royal = [(1, 1), (10, 1), (11, 1), (12, 1), (13, 1)]
     hand.sort()
-    for index in range(len(royal)):
+    for index in range(len(royal) - 1):
         if (royal[index][0] != hand[index][0]):
             return False
     return True
